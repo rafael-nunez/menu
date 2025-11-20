@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Level Menu Website - Version 4</title>
+    <link rel="stylesheet" href="reset.css" />
+    <link rel="stylesheet" href="styles-v4.css" />
+  </head>
+  <body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="menu-wrapper">
+      <!-- Top Menu - Desktop/Tablet only -->
+      <nav class="top-menu" role="navigation" aria-label="Main navigation">
+        <!-- Hamburger Button - Mobile only -->
+        <button
+          type="button"
+          class="hamburger-button"
+          aria-label="Open main menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span class="hamburger-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span class="hamburger-label">Menu</span>
+        </button>
+
+        <!-- Desktop Menu Items -->
+        <ul class="top-menu-items">
+          <li>
+            <button
+              type="button"
+              data-dropdown="products"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="dropdown-products"
+            >
+              Products
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              data-dropdown="services"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="dropdown-services"
+            >
+              Services
+            </button>
+          </li>
+          <li>
+            <button
+              type="button"
+              data-dropdown="company"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-controls="dropdown-company"
+            >
+              Company
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Dropdown Area - Desktop/Tablet only -->
+      <div class="dropdown-area">
+        <!-- Products Dropdown -->
+        <div
+          class="dropdown"
+          id="dropdown-products"
+          role="region"
+          aria-label="Products menu"
+        >
+          <div class="dropdown-content">
+            <!-- Column 1 - Bullet List -->
+            <div class="dropdown-column">
+              <h3>Categories</h3>
+              <ul>
+                <li><a href="#!" tabindex="-1">Electronics</a></li>
+                <li><a href="#!" tabindex="-1">Clothing</a></li>
+                <li><a href="#!" tabindex="-1">Home & Garden</a></li>
+                <li><a href="#!" tabindex="-1">Sports & Outdoors</a></li>
+                <li><a href="#!" tabindex="-1">Books & Media</a></li>
+              </ul>
+            </div>
+
+            <!-- Column 2 - Featured -->
+            <div class="dropdown-column">
+              <h3>Featured</h3>
+              <ul class="thumbnail-list">
+                <li>
+                  <a
+                    href="#!"
+                    tabindex="-1"
+                    aria-label="View new arrivals in products"
+                  >
+                    <img
+                      src="https://placehold.co/200x120/4CAF50/ffffff?text=Featured+1"
+                      alt="New Arrivals - Latest product additions"
+                    />
+                    <span>New Arrivals</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#!"
+                    tabindex="-1"
+                    aria-label="View best selling products"
+                  >
+                    <img
+                      src="https://placehold.co/200x120/2196F3/ffffff?text=Featured+2"
+                      alt="Best Sellers - Top rated products"
+                    />
+                    <span>Best Sellers</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#!"
+                    tabindex="-1"
+                    aria-label="View special offers and deals"
+                  >
+                    <img
+                      src="https://placehold.co/200x120/FF9800/ffffff?text=Featured+3"
+                      alt="Special Offers - Limited time deals"
+                    />
+                    <span>Special Offers</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Column 3 - Bullet List -->
+            <div class="dropdown-column">
+              <h3>Resources</h3>
+              <ul>
+                <li><a href="#!" tabindex="-1">Product Guides</a></li>
+                <li><a href="#!" tabindex="-1">Video Tutorials</a></li>
+                <li><a href="#!" tabindex="-1">Customer Reviews</a></li>
+                <li><a href="#!" tabindex="-1">FAQs</a></li>
+                <li><a href="#!" tabindex="-1">Contact Support</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services Dropdown -->
+        <div
+          class="dropdown"
+          id="dropdown-services"
+          role="region"
+          aria-label="Services menu"
+        >
+          <div class="dropdown-content">
+            <!-- Column 1 - Bullet List -->
+            <div class="dropdown-column">
+              <h3>Professional Services</h3>
+              <ul>
+                <li><a href="#!" tabindex="-1">Consulting</a></li>
+                <li><a href="#!" tabindex="-1">Installation</a></li>
+                <li><a href="#!" tabindex="-1">Maintenance</a></li>
+                <li><a href="#!" tabindex="-1">Training</a></li>
+                <li><a href="#!" tabindex="-1">Custom Solutions</a></li>
+              </ul>
+            </div>
+
+            <!-- Column 2 - Featured -->
+            <div class="dropdown-column">
+              <h3>Featured</h3>
+              <ul class="thumbnail-list">
+                <li>
+                  <a
+                    href="#!"
+                    tabindex="-1"
+                    aria-label="Learn about enterprise service plans"
+                  >
+                    <img
+                      src="https://placehold.co/200x120/9C27B0/ffffff?text=Service+1"
+                      alt="Enterprise Plans - Customized business solutions"
+                    />
+                    <span>Enterprise Plans</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#!"
+                    tabindex="-1"
+                    aria-label="Learn about premium support services"
+                  >
+                    <img
+                      src="https://placehold.co/200x120/F44336/ffffff?text=Service+2"
+                      alt="Premium Support - Priority customer service"
+                    />
+                    <span>Premium Support</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#!"
+                    tabindex="-1"
+                    aria-label="Learn about 24/7 monitoring services"
+                  >
+                    <img
+                      src="https://placehold.co/200x120/00BCD4/ffffff?text=Service+3"
+                      alt="24/7 Monitoring - Round the clock service monitoring"
+                    />
+                    <span>24/7 Monitoring</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Column 3 - Bullet List -->
+            <div class="dropdown-column">
+              <h3>Support</h3>
+              <ul>
+                <li><a href="#!" tabindex="-1">Help Center</a></li>
+                <li><a href="#!" tabindex="-1">Documentation</a></li>
+                <li><a href="#!" tabindex="-1">Community Forum</a></li>
+                <li><a href="#!" tabindex="-1">Live Chat</a></li>
+                <li><a href="#!" tabindex="-1">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Company Dropdown -->
+        <div
+          class="dropdown"
+          id="dropdown-company"
+          role="region"
+          aria-label="Company menu"
+        >
+          <div class="dropdown-content">
+            <!-- Column 1 - Bullet List -->
+            <div class="dropdown-column">
+              <h3>About Us</h3>
+              <ul>
+                <li><a href="#!" tabindex="-1">Our Story</a></li>
+                <li><a href="#!" tabindex="-1">Leadership Team</a></li>
+                <li><a href="#!" tabindex="-1">Careers</a></li>
+                <li><a href="#!" tabindex="-1">Press Room</a></li>
+                <li><a href="#!" tabindex="-1">Partnerships</a></li>
+              </ul>
+            </div>
+
+            <!-- Column 2 - Featured -->
+            <div class="dropdown-column">
+              <h3>Featured</h3>
+              <ul class="thumbnail-list">
+                <li>
+                  <a
+                    href="#!"
+                    tabindex="-1"
+                    aria-label="Read our annual report"
+                  >
+                    <img
+                      src="https://placehold.co/200x120/795548/ffffff?text=Company+1"
+                      alt="Annual Report - Year in review and financial highlights"
+                    />
+                    <span>Annual Report</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#!"
+                    tabindex="-1"
+                    aria-label="Learn about our sustainability initiatives"
+                  >
+                    <img
+                      src="https://placehold.co/200x120/607D8B/ffffff?text=Company+2"
+                      alt="Sustainability - Environmental and social responsibility"
+                    />
+                    <span>Sustainability</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#!"
+                    tabindex="-1"
+                    aria-label="Access investor relations information"
+                  >
+                    <img
+                      src="https://placehold.co/200x120/3F51B5/ffffff?text=Company+3"
+                      alt="Investor Relations - Financial information and reports"
+                    />
+                    <span>Investor Relations</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Column 3 - Bullet List -->
+            <div class="dropdown-column">
+              <h3>Legal</h3>
+              <ul>
+                <li><a href="#!" tabindex="-1">Privacy Policy</a></li>
+                <li><a href="#!" tabindex="-1">Terms of Service</a></li>
+                <li><a href="#!" tabindex="-1">Cookie Policy</a></li>
+                <li><a href="#!" tabindex="-1">Compliance</a></li>
+                <li><a href="#!" tabindex="-1">Accessibility</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Second Menu Row - Always visible -->
+      <nav
+        class="second-menu"
+        role="navigation"
+        aria-label="Secondary navigation"
+      >
+        <ul class="second-menu-items">
+          <li><a href="#!">Home</a></li>
+          <li><a href="#!">Shop</a></li>
+          <li><a href="#!">Deals</a></li>
+          <li><a href="#!">Blog</a></li>
+          <li><a href="#!">Support</a></li>
+          <li><a href="#!">My Account</a></li>
+          <li><a href="#!">Wishlist</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Mobile Navigation Panel -->
+    <nav
+      class="mobile-nav"
+      id="mobile-nav"
+      role="navigation"
+      aria-label="Mobile main navigation"
+    >
+      <div class="mobile-nav-header">
+        <h2>Menu</h2>
+        <button
+          type="button"
+          class="mobile-nav-close"
+          aria-label="Close main menu"
+        >
+          <span>&times;</span>
+        </button>
+      </div>
+
+      <div class="mobile-nav-content">
+        <!-- Products Accordion -->
+        <div class="mobile-accordion-item">
+          <button
+            type="button"
+            class="mobile-accordion-button"
+            aria-expanded="false"
+            aria-controls="mobile-products"
+          >
+            <span>Products</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="mobile-accordion-content" id="mobile-products">
+            <div class="mobile-accordion-inner">
+              <div class="mobile-accordion-section">
+                <h3>Categories</h3>
+                <ul>
+                  <li><a href="#!">Electronics</a></li>
+                  <li><a href="#!">Clothing</a></li>
+                  <li><a href="#!">Home & Garden</a></li>
+                  <li><a href="#!">Sports & Outdoors</a></li>
+                  <li><a href="#!">Books & Media</a></li>
+                </ul>
+              </div>
+              <div class="mobile-accordion-section">
+                <h3>Featured</h3>
+                <ul>
+                  <li><a href="#!">New Arrivals</a></li>
+                  <li><a href="#!">Best Sellers</a></li>
+                  <li><a href="#!">Special Offers</a></li>
+                </ul>
+              </div>
+              <div class="mobile-accordion-section">
+                <h3>Resources</h3>
+                <ul>
+                  <li><a href="#!">Product Guides</a></li>
+                  <li><a href="#!">Video Tutorials</a></li>
+                  <li><a href="#!">Customer Reviews</a></li>
+                  <li><a href="#!">FAQs</a></li>
+                  <li><a href="#!">Contact Support</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Services Accordion -->
+        <div class="mobile-accordion-item">
+          <button
+            type="button"
+            class="mobile-accordion-button"
+            aria-expanded="false"
+            aria-controls="mobile-services"
+          >
+            <span>Services</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="mobile-accordion-content" id="mobile-services">
+            <div class="mobile-accordion-inner">
+              <div class="mobile-accordion-section">
+                <h3>Professional Services</h3>
+                <ul>
+                  <li><a href="#!">Consulting</a></li>
+                  <li><a href="#!">Installation</a></li>
+                  <li><a href="#!">Maintenance</a></li>
+                  <li><a href="#!">Training</a></li>
+                  <li><a href="#!">Custom Solutions</a></li>
+                </ul>
+              </div>
+              <div class="mobile-accordion-section">
+                <h3>Featured</h3>
+                <ul>
+                  <li><a href="#!">Enterprise Plans</a></li>
+                  <li><a href="#!">Premium Support</a></li>
+                  <li><a href="#!">24/7 Monitoring</a></li>
+                </ul>
+              </div>
+              <div class="mobile-accordion-section">
+                <h3>Support</h3>
+                <ul>
+                  <li><a href="#!">Help Center</a></li>
+                  <li><a href="#!">Documentation</a></li>
+                  <li><a href="#!">Community Forum</a></li>
+                  <li><a href="#!">Live Chat</a></li>
+                  <li><a href="#!">Contact Us</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Company Accordion -->
+        <div class="mobile-accordion-item">
+          <button
+            type="button"
+            class="mobile-accordion-button"
+            aria-expanded="false"
+            aria-controls="mobile-company"
+          >
+            <span>Company</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="mobile-accordion-content" id="mobile-company">
+            <div class="mobile-accordion-inner">
+              <div class="mobile-accordion-section">
+                <h3>About Us</h3>
+                <ul>
+                  <li><a href="#!">Our Story</a></li>
+                  <li><a href="#!">Leadership Team</a></li>
+                  <li><a href="#!">Careers</a></li>
+                  <li><a href="#!">Press Room</a></li>
+                  <li><a href="#!">Partnerships</a></li>
+                </ul>
+              </div>
+              <div class="mobile-accordion-section">
+                <h3>Featured</h3>
+                <ul>
+                  <li><a href="#!">Annual Report</a></li>
+                  <li><a href="#!">Sustainability</a></li>
+                  <li><a href="#!">Investor Relations</a></li>
+                </ul>
+              </div>
+              <div class="mobile-accordion-section">
+                <h3>Legal</h3>
+                <ul>
+                  <li><a href="#!">Privacy Policy</a></li>
+                  <li><a href="#!">Terms of Service</a></li>
+                  <li><a href="#!">Cookie Policy</a></li>
+                  <li><a href="#!">Compliance</a></li>
+                  <li><a href="#!">Accessibility</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Backdrop overlay for blur/darken effect -->
+    <div class="menu-backdrop"></div>
+
+    <!-- Main Content -->
+    <div class="content" id="main-content" tabindex="-1">
+      <h1>Welcome to Our Website - Version 4</h1>
+      <p>
+        This website features a sophisticated two-tier navigation menu system
+        with enhanced accessibility and keyboard navigation support. The top row
+        contains three main categories: <a href="#!">Products</a>,
+        <a href="#!">Services</a>, and <a href="#!">Company</a>.
+      </p>
+      <p><strong>New in Version 4:</strong></p>
+      <ul>
+        <li>
+          <strong>Mobile Hamburger Menu:</strong> On mobile devices (≤768px),
+          the main navigation switches to a slide-in hamburger menu with
+          accordion-style sections
+        </li>
+        <li>
+          <strong>Multiple Accordion Sections:</strong> On mobile, you can
+          expand multiple category sections simultaneously for easier browsing
+          and comparison
+        </li>
+        <li>
+          <strong>Persistent Secondary Menu:</strong> The secondary navigation
+          bar (Home, Shop, Deals, etc.) remains visible and horizontally
+          scrollable on mobile
+        </li>
+        <li>
+          <strong>Adaptive Navigation UX:</strong> Desktop/tablet uses hover
+          dropdowns, mobile uses touch-optimized hamburger menu
+        </li>
+        <li>
+          <strong>Improved Mobile Spacing:</strong> Content properly positioned
+          below fixed navigation on all screen sizes
+        </li>
+        <li>
+          <strong>Full Accessibility:</strong> Hamburger menu includes ARIA
+          attributes, keyboard navigation, and focus management
+        </li>
+        <li>
+          <strong>Skip Link:</strong> Keyboard users can press Tab once on page
+          load to reveal a "Skip to main content" link that bypasses all
+          navigation (WCAG 2.1 Level A compliance)
+        </li>
+      </ul>
+      <p><strong>Preserved from Version 3:</strong></p>
+      <ul>
+        <li>
+          <strong>Fixed Menu Overlay:</strong> Entire menu system fixed at top
+          of viewport, overlays page content - zero layout shift!
+        </li>
+        <li>
+          <strong>Backdrop Blur Effect:</strong> Page content gets subtle blur
+          and darkening when dropdown/menu opens
+        </li>
+        <li>
+          <strong>Keyboard Navigation:</strong> Full keyboard support with Tab,
+          Enter/Space, and Escape keys
+        </li>
+        <li>
+          <strong>ARIA Attributes:</strong> Comprehensive screen reader support
+        </li>
+        <li>
+          <strong>CSS Custom Properties:</strong> Single source of truth for
+          timing and color values
+        </li>
+        <li>
+          <strong>Reduced Motion Support:</strong> Respects user's
+          prefers-reduced-motion setting
+        </li>
+      </ul>
+      <p>
+        <strong>Accessibility:</strong> Press Tab when the page loads to reveal
+        the "Skip to main content" link, allowing you to bypass all navigation
+        and jump directly to the page content. This is especially helpful for
+        keyboard and screen reader users.
+      </p>
+      <p>
+        <strong>Desktop/Tablet (&gt;768px):</strong> Hover over any top menu
+        item to reveal an expandable dropdown panel with three columns. The
+        second menu row smoothly slides down beneath the revealed content.
+      </p>
+      <p>
+        <strong>Mobile (≤768px):</strong> Tap the hamburger menu button to open
+        a slide-in navigation panel. Tap category headers to expand accordion
+        sections. Multiple sections can remain open simultaneously for easier
+        browsing. The secondary menu (Home, Shop, Deals, Blog, Support, My
+        Account, Wishlist) remains visible and accessible via horizontal
+        scrolling.
+      </p>
+    </div>
+
+    <script src="script-v4.js"></script>
+  </body>
+</html>

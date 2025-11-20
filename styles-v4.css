@@ -1,0 +1,686 @@
+:root {
+  /* Timing variables - SINGLE SOURCE OF TRUTH */
+  /* JavaScript reads --transition-duration automatically, no need to update JS */
+  --transition-duration: 0.8s; /* Controls BOTH opening AND closing */
+  --transition-duration-fast: 0.3s; /* controls the speed of hover and focus effects */
+
+  /* Color variables */
+  --primary-bg: #fff;
+  --primary-hover: #f0f0f0;
+  --primary-active: #007bff;
+  --secondary-bg: hsl(269deg 53% 27% / 1);
+  --secondary-hover: hsl(269 63% 30% / 1);
+  --white: #fff;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --border-color: #ddd;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.2);
+  --shadow-heavy: rgba(0, 0, 0, 0.3);
+
+  /* Layout variables */
+  --dropdown-max-height: 600px;
+  --mobile-nav-width: 280px;
+}
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Skip Link - Accessibility feature to bypass navigation */
+.skip-link {
+  position: absolute;
+  top: -50px;
+  left: 0;
+  background: var(--primary-bg);
+  color: var(--text-primary);
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  z-index: 2000;
+  transition: top var(--transition-duration-fast);
+  border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--primary-active);
+  outline-offset: 2px;
+}
+
+/* Menu Container - Fixed at top, overlays content */
+.menu-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Top Menu Row */
+.top-menu {
+  background-color: var(--primary-bg);
+  position: relative;
+  z-index: 1002;
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Hamburger Button - Hidden on desktop, visible on mobile */
+.hamburger-button {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 15px 20px;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color var(--transition-duration-fast);
+}
+
+.hamburger-button:hover,
+.hamburger-button:focus {
+  background-color: var(--primary-hover);
+  outline: 2px solid var(--primary-active);
+  outline-offset: -2px;
+}
+
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 24px;
+}
+
+.hamburger-icon span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--white);
+  border-radius: 2px;
+  transition: transform var(--transition-duration-fast);
+}
+
+.top-menu-items {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.top-menu-items > li {
+  position: relative;
+}
+
+/* Button styling for top menu */
+.top-menu-items > li > button {
+  display: block;
+  padding: 20px 40px;
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color var(--transition-duration-fast);
+  font-family: inherit;
+}
+
+.top-menu-items > li > button:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Active state styling - visual feedback when dropdown is open */
+.top-menu-items > li > button.active,
+.top-menu-items > li > button:focus {
+  background-color: var(--primary-hover);
+  outline: 2px solid var(--primary-active);
+  outline-offset: -2px;
+}
+
+/* Backdrop - blur and darken content behind menu */
+.menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.menu-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Dropdown Area - In flow, expands to push second-menu down */
+.dropdown-area {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-duration) ease;
+  position: relative;
+  width: 100%;
+  background-color: transparent;
+}
+
+.dropdown-area.active {
+  /* Responsive max-height: don't exceed viewport minus top menu height (~60px) */
+  max-height: min(600px, calc(100vh - 60px));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.dropdown {
+  padding: 40px 60px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-duration) ease;
+  position: relative;
+  width: 100%;
+  display: none;
+  background-color: var(--white);
+  box-shadow: 0 4px 8px var(--shadow-medium);
+}
+
+.dropdown.active {
+  opacity: 1;
+  visibility: visible;
+  display: block;
+  transition: opacity var(--transition-duration) ease;
+}
+
+.dropdown-content {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Column 1 and 3 - Bullet Lists - shrink to content width */
+.dropdown-column {
+  /* No flex value - shrinks to natural content width */
+}
+
+/* Column 2 - Give center column all remaining space for thumbnails */
+.dropdown-column:nth-child(2) {
+  flex: 2;
+}
+
+.dropdown-column h3 {
+  margin-bottom: 15px;
+  color: var(--text-primary);
+  font-size: 18px;
+}
+
+.dropdown-column ul:not(.thumbnail-list) {
+  list-style: none;
+  padding-left: 0;
+}
+
+.dropdown-column ul:not(.thumbnail-list) li {
+  margin-bottom: 10px;
+}
+
+.dropdown-column ul:not(.thumbnail-list) li a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-duration-fast);
+}
+
+.dropdown-column ul:not(.thumbnail-list) li a:hover,
+.dropdown-column ul:not(.thumbnail-list) li a:focus {
+  color: var(--primary-active);
+  outline: 1px dotted var(--primary-active);
+  outline-offset: 2px;
+}
+
+/* Column 2 - Featured/Thumbnail List */
+.thumbnail-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.thumbnail-list li {
+  flex: 1;
+  text-align: center;
+}
+
+.thumbnail-list a {
+  color: var(--text-primary);
+  text-decoration: none;
+  display: block;
+  transition: color var(--transition-duration-fast);
+}
+
+.thumbnail-list img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: transform var(--transition-duration-fast),
+    box-shadow var(--transition-duration-fast);
+}
+
+.thumbnail-list a:hover img,
+.thumbnail-list a:focus img {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px var(--shadow-medium);
+}
+
+.thumbnail-list a:focus {
+  outline: 2px solid var(--primary-active);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.thumbnail-list span {
+  display: block;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+
+.thumbnail-list a:hover span,
+.thumbnail-list a:focus span {
+  color: var(--primary-active);
+}
+
+/* Second Menu Row - In flow, naturally pushed down by dropdown-area */
+.second-menu {
+  background-color: var(--secondary-bg);
+  border-top: 1px solid var(--border-color);
+  position: relative;
+  box-shadow: 0 4px 8px var(--shadow-medium);
+}
+
+.second-menu-items {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.second-menu-items li a {
+  display: block;
+  padding: 15px 25px;
+  color: var(--white);
+  text-decoration: none;
+  font-size: 14px;
+  transition: background-color var(--transition-duration-fast);
+  white-space: nowrap;
+}
+
+.second-menu-items li a:hover,
+.second-menu-items li a:focus {
+  background-color: var(--secondary-hover);
+  outline: 1px dotted var(--white);
+  outline-offset: -2px;
+}
+
+/* Mobile Navigation Panel - Hidden by default */
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--mobile-nav-width);
+  height: 100vh;
+  background-color: var(--white);
+  z-index: 1100;
+  transform: translateX(-100%);
+  transition: transform var(--transition-duration-fast);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-shadow: 2px 0 8px var(--shadow-medium);
+}
+
+.mobile-nav.active {
+  transform: translateX(0);
+}
+
+.mobile-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: var(--primary-bg);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.mobile-nav-header h2 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.mobile-nav-close {
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 32px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-duration-fast);
+  border-radius: 4px;
+}
+
+.mobile-nav-close:hover,
+.mobile-nav-close:focus {
+  background-color: var(--primary-hover);
+  outline: 2px solid var(--primary-active);
+  outline-offset: -2px;
+}
+
+.mobile-nav-content {
+  padding: 0;
+}
+
+/* Mobile Accordion Styles */
+.mobile-accordion-item {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mobile-accordion-button {
+  width: 100%;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color var(--transition-duration-fast);
+  font-family: inherit;
+}
+
+.mobile-accordion-button:hover,
+.mobile-accordion-button:focus {
+  background-color: var(--secondary-bg);
+  outline: 2px solid var(--primary-active);
+  outline-offset: -2px;
+}
+
+.accordion-icon {
+  font-size: 24px;
+  font-weight: normal;
+  transition: transform var(--transition-duration-fast);
+}
+
+.mobile-accordion-button[aria-expanded="true"] .accordion-icon {
+  transform: rotate(45deg);
+}
+
+.mobile-accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transition-duration-fast) ease;
+  background-color: #fafafa;
+}
+
+.mobile-accordion-content.active {
+  grid-template-rows: 1fr;
+}
+
+.mobile-accordion-inner {
+  overflow: hidden;
+}
+
+.mobile-accordion-section {
+  padding: 15px 20px;
+  border-top: 1px solid var(--border-color);
+}
+
+.mobile-accordion-section:first-child {
+  border-top: none;
+}
+
+.mobile-accordion-section h3 {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mobile-accordion-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.mobile-accordion-section ul li {
+  margin-bottom: 8px;
+}
+
+.mobile-accordion-section ul li a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 15px;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color var(--transition-duration-fast);
+}
+
+.mobile-accordion-section ul li a:hover,
+.mobile-accordion-section ul li a:focus {
+  background-color: var(--secondary-hover);
+  color: var(--primary-active);
+  outline: 1px dotted var(--primary-active);
+  outline-offset: -2px;
+}
+
+/* Main Content */
+.content {
+  max-width: 1200px;
+  margin: 120px auto 60px;
+  padding: 40px;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px var(--shadow-light);
+  scroll-margin-top: 120px; /* Offset scroll position for skip link with fixed header */
+}
+
+.content h1 {
+  color: var(--text-primary);
+  margin-bottom: 20px;
+}
+
+.content p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.content ul {
+  margin-left: 20px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+/* Focus visible for better keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--primary-active);
+  outline-offset: 2px;
+}
+
+/* Responsive Design */
+
+/* Tablet (769px to 1024px) */
+@media (max-width: 1024px) {
+  .dropdown-content {
+    gap: 40px;
+  }
+
+  .dropdown {
+    padding: 30px 40px;
+  }
+}
+
+/* Mobile and Tablet (768px and below) - Switch to hamburger menu */
+@media (max-width: 768px) {
+  /* Hide desktop navigation elements */
+  .top-menu-items {
+    display: none;
+  }
+
+  .dropdown-area {
+    display: none;
+  }
+
+  /* Show hamburger button */
+  .hamburger-button {
+    display: flex;
+  }
+
+  /* Make second menu horizontally scrollable */
+  .second-menu {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .second-menu-items {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .second-menu-items li a {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+
+  /* Adjust content margin - account for hamburger button + second menu */
+  .content {
+    margin: 110px 20px 40px;
+    padding: 30px 20px;
+    scroll-margin-top: 110px;
+  }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+  .content {
+    margin: 110px 10px 20px;
+    padding: 20px 15px;
+    scroll-margin-top: 110px;
+  }
+
+  .content h1 {
+    font-size: 24px;
+  }
+
+  .second-menu-items li a {
+    padding: 12px 15px;
+    font-size: 12px;
+  }
+
+  .mobile-nav {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Reduced motion support for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* Override timing variables for users who prefer reduced motion */
+    --transition-duration: 0.15s;
+    --transition-duration-fast: 0.1s;
+  }
+
+  /* Scope reduced motion to menu elements only - does not affect rest of page */
+
+  /* Remove backdrop blur, use simple tint instead */
+  .menu-backdrop {
+    backdrop-filter: none;
+    transition: opacity var(--transition-duration) ease,
+      visibility var(--transition-duration) ease;
+  }
+
+  /* Reduce menu element transitions */
+  .menu-wrapper *,
+  .menu-wrapper *::before,
+  .menu-wrapper *::after,
+  .mobile-nav *,
+  .mobile-nav *::before,
+  .mobile-nav *::after {
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+    transition-duration: 0.01ms;
+  }
+
+  /* Exception: Keep dropdown-area transition functional but short */
+  .dropdown-area {
+    transition: max-height var(--transition-duration) ease;
+  }
+
+  /* Exception: Keep dropdown opacity transition functional but short */
+  .dropdown {
+    transition: opacity var(--transition-duration) ease;
+  }
+
+  /* Exception: Keep button transitions functional but short */
+  .top-menu-items > li > button,
+  .hamburger-button,
+  .mobile-accordion-button {
+    transition: background-color var(--transition-duration-fast);
+  }
+
+  /* Exception: Keep skip link transition functional but short */
+  .skip-link {
+    transition: top var(--transition-duration-fast);
+  }
+
+  /* Exception: Keep link transitions functional but short */
+  .second-menu-items li a,
+  .dropdown-column ul:not(.thumbnail-list) li a,
+  .thumbnail-list a,
+  .mobile-accordion-section ul li a {
+    transition: color var(--transition-duration-fast);
+  }
+
+  /* Exception: Keep thumbnail image transitions functional but short */
+  .thumbnail-list img {
+    transition: transform var(--transition-duration-fast),
+      box-shadow var(--transition-duration-fast);
+  }
+
+  /* Exception: Keep mobile nav slide transition functional but short */
+  .mobile-nav {
+    transition: transform var(--transition-duration-fast);
+  }
+
+  /* Exception: Keep accordion transitions functional but short */
+  .mobile-accordion-content {
+    transition: grid-template-rows var(--transition-duration-fast) ease;
+  }
+
+  .accordion-icon {
+    transition: transform var(--transition-duration-fast);
+  }
+}
